@@ -108,25 +108,33 @@ class SinhVienController
         }
     }
 
-    // public function update()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         $ma_sv    = $_POST['MaSV'];
-    //         $ho_ten   = $_POST['HoTen'];
-    //         $gioi_tinh = $_POST['GioiTinh'];
-    //         $ngay_sinh = $_POST['NgaySinh'];
-    //         $hinh     = $_POST['Hinh'];
-    //         $ma_nganh = $_POST['MaNganh'];
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ma_sv    = $_POST['MaSV'];
+            $ho_ten   = $_POST['HoTen'];
+            $gioi_tinh = $_POST['GioiTinh'];
+            $ngay_sinh = $_POST['NgaySinh'];
+            $ma_nganh = $_POST['MaNganh'];
+            $hinh_cu = $_POST['HinhCu'];
 
-    //         $result = $this->sinhVienModel->updateSinhVien($ma_sv, $ho_ten, $gioi_tinh, $ngay_sinh, $hinh, $ma_nganh);
+            // Xử lý upload hình mới nếu có
+            $hinh_moi = $hinh_cu;
+            if (isset($_FILES['Hinh']) && $_FILES['Hinh']['error'] === UPLOAD_ERR_OK) {
+                $hinh_moi = basename($_FILES['Hinh']['name']);
+                move_uploaded_file($_FILES['Hinh']['tmp_name'], 'app/public/images/' . $hinh_moi);
+            }
 
-    //         if ($result) {
-    //             header('Location: /KT/SinhVien');
-    //         } else {
-    //             echo "Cập nhật thất bại.";
-    //         }
-    //     }
-    // }
+            $result = $this->sinhVienModel->updateSinhVien($ma_sv, $ho_ten, $gioi_tinh, $ngay_sinh, $hinh_moi, $ma_nganh);
+
+            if ($result) {
+                header('Location: /KT2/SinhVien');
+            } else {
+                echo "Cập nhật sinh viên thất bại.";
+            }
+        }
+    }
+
 
     public function delete($ma_sv)
     {

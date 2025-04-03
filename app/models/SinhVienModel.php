@@ -79,26 +79,26 @@ class SinhVienModel
         return $stmt->execute();
     }
 
-    // public function updateSinhVien($ma_sv, $ho_ten, $gioi_tinh, $ngay_sinh, $hinh, $ma_nganh)
-    // {
-    //     $query = "UPDATE sinhvien SET 
-    //                 HoTen = :ho_ten,
-    //                 GioiTinh = :gioi_tinh,
-    //                 NgaySinh = :ngay_sinh,
-    //                 Hinh = :hinh,
-    //                 MaNganh = :ma_nganh
-    //               WHERE MaSV = :ma_sv";
+    public function updateSinhVien($ma_sv, $ho_ten, $gioi_tinh, $ngay_sinh, $hinh, $ma_nganh)
+    {
+        $query = "UPDATE sinhvien SET 
+                    HoTen = :ho_ten,
+                    GioiTinh = :gioi_tinh,
+                    NgaySinh = :ngay_sinh,
+                    Hinh = :hinh,
+                    MaNganh = :ma_nganh
+                  WHERE MaSV = :ma_sv";
 
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->bindParam(':ma_sv', $ma_sv);
-    //     $stmt->bindParam(':ho_ten', $ho_ten);
-    //     $stmt->bindParam(':gioi_tinh', $gioi_tinh);
-    //     $stmt->bindParam(':ngay_sinh', $ngay_sinh);
-    //     $stmt->bindParam(':hinh', $hinh);
-    //     $stmt->bindParam(':ma_nganh', $ma_nganh);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':ma_sv', $ma_sv);
+        $stmt->bindParam(':ho_ten', $ho_ten);
+        $stmt->bindParam(':gioi_tinh', $gioi_tinh);
+        $stmt->bindParam(':ngay_sinh', $ngay_sinh);
+        $stmt->bindParam(':hinh', $hinh);
+        $stmt->bindParam(':ma_nganh', $ma_nganh);
 
-    //     return $stmt->execute();
-    // }
+        return $stmt->execute();
+    }
 
     public function deleteSinhVien($ma_sv)
     {
